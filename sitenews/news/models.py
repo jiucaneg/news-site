@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
@@ -38,7 +39,7 @@ class Tag(models.Model):
 
 
 class Post(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, verbose_name='Автор', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, blank=True, verbose_name='Автор', on_delete=models.CASCADE)
     title = models.CharField(max_length=150, verbose_name='Наименование')
     slug = models.SlugField(max_length=150, verbose_name='url', unique=True)
     content = models.TextField(blank=True, verbose_name='Контент')

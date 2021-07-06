@@ -30,9 +30,9 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        prepopulated_fields = {'slug': ('title',)}
         # fields = '__all__'
-        fields = ['title', 'slug', 'category', 'author', 'tags', 'content', 'photo', 'is_published', ]
+        exclude = ['author']
+        fields = ['title', 'slug', 'category', 'tags', 'content', 'photo', 'is_published', ]
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'content': forms.CharField(widget=CKEditorUploadingWidget()),
