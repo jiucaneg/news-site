@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Вход :: {{ block.super }}
+{% endblock %}
+
+{% block sidebar %}{% endblock %}
+
+{% block content %}
+<h1>Войти</h1>
+
+<div class="container">
+	<div class="row main-form">
+
+		<form method="post">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button type="submit" class="btn btn-primary btn-block">Войти</button>
+			<div class="d-flex justify-content-center links">
+				У вас нету аккаунта? <a href="{% url 'register' %}" class="ml-2">Регистрация</a>
+			</div>
+			<div class="d-flex justify-content-center links">
+				Забыли пароль? <a href="{% url 'reset_password' %}" class="ml-2">Востановить пароль</a>
+			</div>
+		</form>
+
+	</div>
+</div>
+
+{% endblock %}
