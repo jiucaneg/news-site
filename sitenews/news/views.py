@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -45,19 +44,7 @@ def user_logout(request):
 class CreatePost(LoginRequiredMixin, CreateView):
     form_class = PostForm
     template_name = 'news/add_news.html'
-    # success_url = reverse_lazy('home')
     login_url = '/login/'
-
-    @login_required
-    def makePost(self, request):
-        form = PostForm(request.POST or None)
-        if request.method == "POST":
-            if form.is_valid():
-                post = form.save(commit=False)
-                post.author = request.User
-                post.save()
-                return redirect('post')
-        return render(request, 'news/add_news.html', locals())
 
 
 class Home(ListView):

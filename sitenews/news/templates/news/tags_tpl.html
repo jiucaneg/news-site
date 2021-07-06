@@ -1,5 +1,6 @@
-<div class="tags">
+<div>
 	<h2 class="sidebar-title">Теги</h2>
-	{% for tag in %}
-	<p><a href="#"></a></p>
+	{% for tag in tags %}
+		<a class="btn btn-primary" href="{{ tag.get_absolute_url }}" role="button">{{ tag.title }}</a>
+	{% endfor %}
 </div>

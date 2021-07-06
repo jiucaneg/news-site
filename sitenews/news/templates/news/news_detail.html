@@ -18,7 +18,7 @@
         <h3 class="card-title text-center">{{ post.title }}</h3>
         <hr align="center" size="3" color="#007bff" />
         <span>
-            Категория: <a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a>
+            Категории: <a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a>
         </span>
         <br>
         {% if post.tags.exists %}
@@ -39,7 +39,7 @@
         <p class="card-text">{{ post.content|safe|linebreaks }}</p>
     </div>
     <div class="card-footer text-muted">
-     Автор: {{ post.author }} {{ post.created_at|date:"Y-m-d H:i" }}
+        {{ post.created_at|date:"Y-m-d H:i" }}
     </div>
 </div>
 

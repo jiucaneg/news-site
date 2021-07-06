@@ -1,8 +1,6 @@
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
 from .models import Post
-import re
-from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from captcha.fields import CaptchaField
@@ -31,16 +29,9 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         # fields = '__all__'
-        exclude = ['author']
-        fields = ['title', 'slug', 'category', 'tags', 'content', 'photo', 'is_published', ]
+        fields = ['title', 'category', 'tags', 'content', 'photo', 'is_published', ]
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'content': forms.CharField(widget=CKEditorUploadingWidget()),
             'category': forms.Select(attrs={'class': 'form-control'}),
         }
-
-    def clean_title(self):
-        title = self.cleaned_data['title']
-        if re.match(r'\d', title):
-            raise ValidationError('Название не должно начинаться с цифры')
-        return title

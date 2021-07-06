@@ -26,13 +26,13 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     form = PostAdminForm
     save_on_top = True
-    list_display = ('id', 'title', 'slug', 'author', 'category', 'created_at', 'is_published', 'get_photo')
+    list_display = ('id', 'title', 'slug', 'category', 'created_at', 'is_published', 'get_photo')
     list_display_links = ('id', 'title')
     list_editable = ('is_published',)
     search_fields = ('title',)
     list_filter = ('category',)
     readonly_fields = ('created_at', 'get_photo', 'views')
-    fields = ('title', 'slug', 'author', 'category', 'tags', 'content', 'photo', 'get_photo', 'is_published', 'views', 'created_at')
+    fields = ('title', 'slug', 'category', 'tags', 'content', 'photo', 'get_photo', 'is_published', 'views', 'created_at')
 
     def get_photo(self, obj):
         if obj.photo:

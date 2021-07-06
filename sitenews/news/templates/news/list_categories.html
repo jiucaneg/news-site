@@ -1,4 +1,5 @@
 <div class="list-group">
+    <h2 class="sidebar-title">Категории</h2>
     {% for item in categories %}
     <a href="{{ item.get_absolute_url }}" class="list-group-item list-group-item-action">{{ item.title }}</a>
     {% endfor %}

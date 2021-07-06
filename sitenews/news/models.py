@@ -1,10 +1,7 @@
-from django.conf import settings
-from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 
-
-# Create your models here.
 
 class Category(models.Model):
     title = models.CharField(max_length=150)
@@ -39,7 +36,6 @@ class Tag(models.Model):
 
 
 class Post(models.Model):
-    author = models.ForeignKey(User, blank=True, verbose_name='Автор', on_delete=models.CASCADE)
     title = models.CharField(max_length=150, verbose_name='Наименование')
     slug = models.SlugField(max_length=150, verbose_name='url', unique=True)
     content = models.TextField(blank=True, verbose_name='Контент')
@@ -50,6 +46,10 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='Категория', related_name='posts')
     tags = models.ManyToManyField(Tag, blank=True, verbose_name='Тег', related_name='posts')
     views = models.IntegerField(default=0, verbose_name='Кол-во просмотров')
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title, allow_unicode=True)
+        super(Post, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
